@@ -1,9 +1,12 @@
 const BillingCycle = require('./billingCycle');
+const errorHandler = require('../common/errorHandler');
+
 
 //criação dos serviços REST
 
 BillingCycle.methods(['get', 'post', 'put', 'delete']);
 BillingCycle.updateOptions({ new: true, runValidators: true }) // traz sempre a nova informação pós atualização e validar no update
+BillingCycle.after('post', errorHandler).after('put', errorHandler)
 
 BillingCycle.route('get', (req, res, next) => {
 
